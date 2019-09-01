@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tiny vue</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{name}}</p>
+        <p v-text='name'></p>
+        <p v-html='tag'></p>
+        <button @click='changeName'>更新</button> <br/>
+        <input type="text" v-model='inputText'> <br/>
+        <p>{{inputText}}</p>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                name: 'Jack',
+                tag: '<a href="https://www.baidu.com/">百度一下</a>',
+                inputText: 'init text'
+            },
+            methods: {
+                changeName() {
+                    this.name = 'Jack Zing';
+                }
+            }
+        });
+
+        // console.log(vm.name);
+        // vm.name = 'Jack Zing';
+        // console.log(vm.name);
+    </script>
+</body>
+</html>
