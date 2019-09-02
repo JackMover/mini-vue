@@ -61,7 +61,7 @@ class Vue {
     }
 
     hijackData(data) {
-        if (!data || typeof data !== 'object') {//递归退出的条件，exit recursive
+        if (!data || typeof data !== 'object') {//递归退出的条件(exit recursive)
             return;
         }
         Object.keys(data).forEach(key => {
@@ -69,7 +69,7 @@ class Vue {
             new Observer(data, key, data[key]);//观察数据(observe data)
         });
     }
-
+    //数据代理(proxy data)
     proxyData(data) {
         Object.keys(data).forEach(key => {
             Object.defineProperty(this, key, {
@@ -105,7 +105,7 @@ class Observer{
             enumerable: true,
             configurable: false,
             get() {
-                if (Dep.target) {
+                if (Dep.target) {//收集依赖(collect dependencies)
                     dep.addDep(Dep.target);
                 }
                 return val;
@@ -115,7 +115,7 @@ class Observer{
                     return;
                 }
                 val = newVal;
-                dep.notify();
+                dep.notify();//数据改变，通知更新(notify to update once data changed)
             }
         });
     }
@@ -140,11 +140,10 @@ class Compile {
             this.$fragment = this.node2Fragment(this.$el);
             //编译节点(compile nodes)
             this.compile(this.$fragment);
-            //将编译好的节点转移回问到(move compiled nodes back to document)
+            //将编译好的节点转移回文档(move compiled nodes back to document)
             this.$el.appendChild(this.$fragment);
         }
     }
-
     node2Fragment(node) {
         const fragment = document.createDocumentFragment();
         let child = null;
