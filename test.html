@@ -7,31 +7,49 @@
 <body>
     <div id="app">
         <p>{{name}}</p>
+        <p>{{wife.name}}</p>
         <p v-text='name'></p>
+        <p v-text='wife.name'></p>
         <p v-html='tag'></p>
         <button @click='changeName'>更新</button> <br/>
-        <input type="text" v-model='inputText'> <br/>
-        <p>{{inputText}}</p>
+
+        <input type="text" v-model='name'> <br/>
+
+        <input type="text" v-model='wife.name'> <br/>
     </div>
-    <script src="./vue.js"></script>
+    <!-- <script src="./vue.js"></script> -->
+    <script src="./vue-modular-comments.js"></script>
+
+    
     <script>
         const vm = new Vue({
             el: '#app',
             data: {
                 name: 'Jack',
+                wife: {
+                    name: 'Anna',
+                    age: 18
+                },
                 tag: '<a href="https://www.baidu.com/">百度一下</a>',
                 inputText: 'init text'
             },
             methods: {
                 changeName() {
                     this.name = 'Jack Zing';
+                    this.tag = '<a href="https://sina.cn/">新浪</a>';
+                    this.wife.name = 'Lucy';
                 }
             }
         });
+/*
+        console.log(vm.name);
+        vm.name = 'Jack Zing';
+        console.log(vm.name);
 
-        // console.log(vm.name);
-        // vm.name = 'Jack Zing';
-        // console.log(vm.name);
+        console.log(vm.wife.name);
+        vm.wife.name = 'Lucy';
+        console.log(vm.wife.name);
+        */
     </script>
 </body>
 </html>
